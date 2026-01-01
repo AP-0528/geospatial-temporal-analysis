@@ -16,3 +16,11 @@ Thumbs.db
 # Data outputs
 data/cache/
 data/processed/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/build/
+
+# Python
+backend/venv/
+__pycache__/
