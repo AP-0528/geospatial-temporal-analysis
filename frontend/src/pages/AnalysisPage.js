@@ -192,42 +192,73 @@ function AnalysisPage() {
             {/* Statistics */}
             <Paper sx={{ p: 3 }}>
               <Typography variant="h6" gutterBottom>
-                Change Summary
+                Analysis Summary
               </Typography>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6} md={3}>
                   <Box textAlign="center" p={2} bgcolor="#e3f2fd" borderRadius={2}>
                     <Typography variant="h4" color="primary" fontWeight="bold">
-                      45%
+                      {analysisData?.images?.length || 0}
                     </Typography>
-                    <Typography variant="body2">Urban Growth</Typography>
+                    <Typography variant="body2">Images Retrieved</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                   <Box textAlign="center" p={2} bgcolor="#e8f5e9" borderRadius={2}>
                     <Typography variant="h4" color="success.main" fontWeight="bold">
-                      -23%
+                      {years.length > 0 ? `${years[years.length - 1] - years[0]}` : '0'}
                     </Typography>
-                    <Typography variant="body2">Forest Cover</Typography>
+                    <Typography variant="body2">Years Span</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                   <Box textAlign="center" p={2} bgcolor="#fff3e0" borderRadius={2}>
                     <Typography variant="h4" color="warning.main" fontWeight="bold">
-                      12%
+                      {analysisData?.images?.length > 0 
+                        ? `${Math.round(analysisData.images.reduce((sum, img) => sum + (img.cloud_cover || 0), 0) / analysisData.images.length)}%`
+                        : 'N/A'}
                     </Typography>
-                    <Typography variant="body2">Agricultural Land</Typography>
+                    <Typography variant="body2">Avg Cloud Cover</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                   <Box textAlign="center" p={2} bgcolor="#fce4ec" borderRadius={2}>
                     <Typography variant="h4" color="error.main" fontWeight="bold">
-                      8
+                      {analysisData?.images?.[0]?.satellite || 'Sentinel-2'}
                     </Typography>
-                    <Typography variant="body2">Major Changes</Typography>
+                    <Typography variant="body2">Satellite Source</Typography>
                   </Box>
                 </Grid>
               </Grid>
+              
+              {/* Location Details */}
+              <Box mt={3} p={2} bgcolor="#f5f5f5" borderRadius={2}>
+                <Typography variant="subtitle2" gutterBottom fontWeight="bold">
+                  Location Details
+                </Typography>
+                <Grid container spacing={2}>
+                  <Grid item xs={6} sm={3}>
+                    <Typography variant="body2" color="text.secondary">Latitude</Typography>
+                    <Typography variant="body1" fontWeight="medium">{latitude}</Typography>
+                  </Grid>
+                  <Grid item xs={6} sm={3}>
+                    <Typography variant="body2" color="text.secondary">Longitude</Typography>
+                    <Typography variant="body1" fontWeight="medium">{longitude}</Typography>
+                  </Grid>
+                  <Grid item xs={6} sm={3}>
+                    <Typography variant="body2" color="text.secondary">First Image</Typography>
+                    <Typography variant="body1" fontWeight="medium">
+                      {analysisData?.images?.[0]?.date || 'N/A'}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} sm={3}>
+                    <Typography variant="body2" color="text.secondary">Latest Image</Typography>
+                    <Typography variant="body1" fontWeight="medium">
+                      {analysisData?.images?.[analysisData.images.length - 1]?.date || 'N/A'}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Box>
             </Paper>
           </>
         )}
