@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slider, Box, Typography } from '@mui/material';
+import { Slider, Box } from '@mui/material';
 
 function TimelineSlider({ years, selectedYear, onYearChange }) {
   const marks = years.map(year => ({
