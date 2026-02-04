@@ -14,8 +14,8 @@ const GlobeBackground = () => {
       .bumpImageUrl('https://unpkg.com/three-globe@2.31.0/example/img/earth-topology.png')
       .backgroundColor('rgba(0,0,0,0)')
       .showAtmosphere(false)
-      .width(500)
-      .height(500);
+      .width(700)
+      .height(700);
 
     // Configure controls
     const controls = globe.controls();
@@ -41,11 +41,11 @@ const GlobeBackground = () => {
       <div
         style={{
           position: 'fixed',
-          top: '280px',
+          top: '240px',
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '600px',
-          height: '600px',
+          width: '800px',
+          height: '800px',
           zIndex: 0,
           background: 'radial-gradient(circle, transparent 30%, rgba(74, 78, 105, 0.8) 60%, rgba(34, 34, 59, 1) 80%)',
           pointerEvents: 'none',
@@ -57,13 +57,13 @@ const GlobeBackground = () => {
         ref={globeContainerRef}
         style={{
           position: 'fixed',
-          top: '280px',
+          top: '240px',
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '500px',
-          height: '500px',
+          width: '700px',
+          height: '700px',
           zIndex: 0,
-          opacity: 0.35,
+          opacity: 0.4,
           pointerEvents: 'none',
           filter: 'saturate(0.7)',
         }}

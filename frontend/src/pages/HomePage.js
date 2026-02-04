@@ -92,14 +92,14 @@ function HomePage() {
 
     return {
       position: 'absolute',
-      width: '320px',
-      height: '280px',
+      width: '420px',
+      height: '380px',
       cursor: 'pointer',
       transform: isActive
         ? 'translateX(-50%) translateZ(0) rotateY(0deg) scale(1)'
         : isLeft
-        ? `translateX(calc(-50% - ${absDiff * 200}px)) translateZ(${-absDiff * 100}px) rotateY(25deg) scale(${1 - absDiff * 0.15})`
-        : `translateX(calc(-50% + ${absDiff * 200}px)) translateZ(${-absDiff * 100}px) rotateY(-25deg) scale(${1 - absDiff * 0.15})`,
+        ? `translateX(calc(-50% - ${absDiff * 220}px)) translateZ(${-absDiff * 100}px) rotateY(25deg) scale(${1 - absDiff * 0.15})`
+        : `translateX(calc(-50% + ${absDiff * 220}px)) translateZ(${-absDiff * 100}px) rotateY(-25deg) scale(${1 - absDiff * 0.15})`,
       left: '50%',
       zIndex: 10 - absDiff,
       opacity: 1 - absDiff * 0.3,
@@ -145,7 +145,7 @@ function HomePage() {
       
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         {/* Header */}
-        <Box textAlign="center" mb={6}>
+        <Box textAlign="center" mb={10}>
           <SatelliteAltIcon sx={{ fontSize: 60, color: 'white', mb: 2 }} />
           <Typography variant="h2" color="white" gutterBottom fontWeight="bold">
             Geospatial Temporal Analysis
@@ -159,8 +159,8 @@ function HomePage() {
         <Box 
           sx={{ 
             position: 'relative', 
-            height: '380px', 
-            mb: 8,
+            height: '420px', 
+            mb: 12,
             perspective: '1200px',
             perspectiveOrigin: 'center center',
           }}
@@ -318,8 +318,8 @@ function HomePage() {
         <Paper 
           elevation={0} 
           sx={{ 
-            p: 5, 
-            maxWidth: 600, 
+            p: 6, 
+            maxWidth: 700, 
             mx: 'auto',
             background: 'rgba(34, 34, 59, 0.85)',
             backdropFilter: 'blur(16px)',
@@ -328,10 +328,10 @@ function HomePage() {
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
           }}
         >
-          <Typography variant="h5" gutterBottom textAlign="center" sx={{ color: '#f2e9e4', fontWeight: 600 }}>
+          <Typography variant="h4" gutterBottom textAlign="center" sx={{ color: '#f2e9e4', fontWeight: 600 }}>
             Enter Location Coordinates
           </Typography>
-          <Typography variant="body2" textAlign="center" mb={3} sx={{ color: '#c9ada7' }}>
+          <Typography variant="body1" textAlign="center" mb={4} sx={{ color: '#c9ada7' }}>
             Enter latitude and longitude to analyze geographical changes
           </Typography>
 
@@ -418,24 +418,27 @@ function HomePage() {
           </Box>
 
           {/* Sample Locations */}
-          <Box mt={4}>
-            <Typography variant="subtitle2" sx={{ color: '#f2e9e4', mb: 2, fontWeight: 600 }}>
+          <Box mt={6} pt={4} sx={{ borderTop: '1px solid rgba(201, 173, 167, 0.2)' }}>
+            <Typography variant="subtitle1" sx={{ color: '#f2e9e4', mb: 4, fontWeight: 600, fontSize: '1.2rem', textAlign: 'center' }}>
               🌍 Explore Sample Locations
             </Typography>
             
             <Tabs
               value={selectedCategory}
               onChange={(e, newValue) => setSelectedCategory(newValue)}
-              variant="fullWidth"
+              variant="scrollable"
+              scrollButtons="auto"
               sx={{
-                mb: 2,
+                mb: 4,
                 backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                borderRadius: '8px',
+                borderRadius: '10px',
                 '& .MuiTab-root': {
                   color: '#9a8c98',
-                  minHeight: 48,
-                  fontSize: '0.75rem',
+                  minHeight: 56,
+                  fontSize: '0.85rem',
                   fontWeight: 500,
+                  minWidth: 'auto',
+                  px: 2,
                   '&.Mui-selected': {
                     color: '#f2e9e4',
                     fontWeight: 600,
@@ -445,15 +448,18 @@ function HomePage() {
                   backgroundColor: '#c9ada7',
                   height: 3,
                 },
+                '& .MuiTabs-scrollButtons': {
+                  color: '#f2e9e4',
+                },
               }}
             >
-              <Tab icon={<LocationCityIcon sx={{ fontSize: 18 }} />} label="Urban" iconPosition="start" />
-              <Tab icon={<NatureIcon sx={{ fontSize: 18 }} />} label="Nature" iconPosition="start" />
-              <Tab icon={<AccountBalanceIcon sx={{ fontSize: 18 }} />} label="Landmarks" iconPosition="start" />
-              <Tab icon={<BusinessIcon sx={{ fontSize: 18 }} />} label="Infrastructure" iconPosition="start" />
+              <Tab icon={<LocationCityIcon sx={{ fontSize: 22 }} />} label="Urban" iconPosition="start" />
+              <Tab icon={<NatureIcon sx={{ fontSize: 22 }} />} label="Nature" iconPosition="start" />
+              <Tab icon={<AccountBalanceIcon sx={{ fontSize: 22 }} />} label="Landmarks" iconPosition="start" />
+              <Tab icon={<BusinessIcon sx={{ fontSize: 22 }} />} label="Infrastructure" iconPosition="start" />
             </Tabs>
 
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>
               {Object.values(sampleLocations)[selectedCategory].map((location) => (
                 <Chip
                   key={location.name}
@@ -467,6 +473,9 @@ function HomePage() {
                     color: '#f2e9e4',
                     border: '1px solid rgba(201, 173, 167, 0.5)',
                     fontWeight: 500,
+                    fontSize: '0.95rem',
+                    padding: '10px 6px',
+                    height: '40px',
                     transition: 'all 0.2s ease',
                     '&:hover': {
                       backgroundColor: 'rgba(201, 173, 167, 0.5)',
@@ -478,7 +487,7 @@ function HomePage() {
               ))}
             </Box>
             
-            <Typography variant="caption" sx={{ color: '#9a8c98', mt: 2, display: 'block' }}>
+            <Typography variant="body2" sx={{ color: '#9a8c98', mt: 4, display: 'block', textAlign: 'center' }}>
               Click a location to auto-fill coordinates
             </Typography>
           </Box>
